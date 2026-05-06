@@ -9,24 +9,25 @@ class Bienvenida extends StatefulWidget {
 }
 
 class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _fadeAnim;
-  late Animation<double> _scaleAnim;
+  //declaramos variables para manejar una animación
+  late AnimationController _ctrl; //Controla el tiempo de la animación
+  late Animation<double> _fadeAnim; //Animación de opacidad
+  late Animation<double> _scaleAnim;//Animación de escala (zoom)
 
   @override
   void initState() {
-    super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
-    _fadeAnim  = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);
-    _scaleAnim = Tween<double>(begin: 0.7, end: 1.0).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut),
+    super.initState();//Inicializamos las animaciones
+    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200)); //Duracion de 1.2 segundos
+    _fadeAnim  = CurvedAnimation(parent: _ctrl, curve: Curves.easeIn);//empieza lentamente y luego acelera
+    _scaleAnim = Tween<double>(begin: 0.7, end: 1.0).animate( //hace que empieze empiece pequeño y luego crezca a su tamaño normal
+      CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut),//efecto de rebote al aparecer
     );
-    _ctrl.forward();
+    _ctrl.forward();//Iniciamos la animación al cargar la pantalla
   }
 
   @override
-  void dispose() {
-    _ctrl.dispose();
+  void dispose() { //libera memoria y detiene la animacion
+    _ctrl.dispose();//Detiene la animación y libera recursos
     super.dispose();
   }
 
@@ -42,7 +43,7 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
             end: Alignment.bottomRight,
           ),
         ),
-        child: Stack(
+        child: Stack( //Permite superponer widgets, como los círculos decorativos y el contenido central
           children: [
             // Círculos decorativos de fondo
             Positioned(top: -60, left: -60,
@@ -54,14 +55,14 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
 
             // Contenido central animado
             Center(
-              child: FadeTransition(
+              child: FadeTransition(//Aplica la animación de opacidad al contenido
                 opacity: _fadeAnim,
-                child: ScaleTransition(
+                child: ScaleTransition(//Aplica la animación de escala al contenido
                   scale: _scaleAnim,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Padding(//Agrega espacio horizontal alrededor del contenido
+                    padding: const EdgeInsets.symmetric(horizontal: 32),//Espacio a los lados para que no quede pegado a los bordes
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.min,//El contenido se ajusta a su tamaño mínimo necesario
                       children: [
                         // Ícono principal
                         Container(
@@ -71,12 +72,12 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
                             shape: BoxShape.circle,
                             color: Colors.amber.shade600,
                             boxShadow: [
-                              BoxShadow(color: Colors.amber.withOpacity(0.4), blurRadius: 20, spreadRadius: 4),
+                              BoxShadow(color: Colors.amber.withOpacity(0.4), blurRadius: 20, spreadRadius: 4),//Sombra amarilla suave alrededor del ícono
                             ],
                           ),
-                          child: const Icon(Icons.travel_explore, size: 60, color: Colors.white),
+                          child: const Icon(Icons.travel_explore, size: 60, color: Colors.white),//Icono de viajante
                         ),
-                        const SizedBox(height: 28),
+                        const SizedBox(height: 28),//Espacio entre el ícono y el título de 28px
 
                         // Título
                         const Text(
@@ -84,11 +85,11 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 34,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.5,
+                            fontWeight: FontWeight.bold,//Texto en negrita
+                            letterSpacing: 1.5, //Espacio entre letras de 1.5px
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 10), //Espacio entre el título y el subtítulo de 10px
 
                         // Subtítulo
                         Text(
@@ -97,40 +98,40 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
                             fontSize: 15,
-                            height: 1.5,
+                            height: 1.5, //Espacio entre líneas de 1.5px
                           ),
                         ),
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 50), //Espacio entre el subtítulo y los botones de 50px
 
                         // Botón principal
                         SizedBox(
-                          width: double.infinity,
-                          height: 52,
-                          child: ElevatedButton.icon(
-                            onPressed: () => Navigator.pushNamed(context, '/editor'),
-                            icon: const Icon(Icons.play_arrow, size: 24),
-                            label: const Text('Comenzar', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.amber.shade600,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                              elevation: 8,
+                          width: double.infinity, //El botón ocupa todo el ancho disponible
+                          height: 52, //Altura del botón de 52px
+                          child: ElevatedButton.icon( //Boton con icono y texto
+                            onPressed: () => Navigator.pushNamed(context, '/editor'),//Navega a la pantalla del editor al presionar el boton
+                            icon: const Icon(Icons.play_arrow, size: 24),//Icono de "play" para indicar que es el boton de inicio
+                            label: const Text('Comenzar', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),//Texto del boton
+                            style: ElevatedButton.styleFrom( //Estilo del boton
+                              backgroundColor: Colors.amber.shade600, //Fondo amber
+                              foregroundColor: Colors.white, //Texto e icono en blanco
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),//Boton con bordes redondeados
+                              elevation: 8,//Sombra del boton para darle profundidad
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 16),//Espacio entre los botones de 16px
 
                         // Botón secundario
                         SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: OutlinedButton.icon(
-                            onPressed: () => Navigator.pushNamed(context, '/acerca'),
-                            icon: const Icon(Icons.info_outline, color: Colors.white),
-                            label: const Text('¿Cómo funciona?', style: TextStyle(color: Colors.white, fontSize: 15)),
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Colors.white54),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+                          width: double.infinity, //El botón ocupa todo el ancho disponible
+                          height: 50, //Altura del botón de 50px
+                          child: OutlinedButton.icon( //Boton con borde y sin fondo
+                            onPressed: () => Navigator.pushNamed(context, '/acerca'), //Navega a la pantalla de "Acerca de" al presionar el boton
+                            icon: const Icon(Icons.info_outline, color: Colors.white), //icono de informacion
+                            label: const Text('¿Cómo funciona?', style: TextStyle(color: Colors.white, fontSize: 15)), //Texto del boton en blanco
+                            style: OutlinedButton.styleFrom( //Estilo del boton
+                              side: const BorderSide(color: Colors.white54), //Borde blanco semitransparente
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)), //Boton con bordes redondeados
                             ),
                           ),
                         ),
@@ -146,11 +147,11 @@ class _BienvenidaState extends State<Bienvenida> with SingleTickerProviderStateM
     );
   }
 
-  Widget _circuloFondo(double radio, Color color) {
-    return Container(
+  Widget _circuloFondo(double radio, Color color) { //Recibe el radio y el color
+    return Container( //retorna un contenedor circular con el tamaño y color especificados
       width: radio,
       height: radio,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: color), //Forma circular y color de fondo
     );
   }
 }

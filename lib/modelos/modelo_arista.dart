@@ -5,7 +5,7 @@ import 'package:tsp_viajante2/modelos/modelo_nodo.dart';
 class ModeloArista {
   ModeloNodo origen;
   ModeloNodo destino;
-  int peso;         // Peso positivo de la arista
+  double peso;         // Peso positivo de la arista
   double curvatura; // Controla la curva de la arista (Bézier)
 
   // Propiedades visuales para pintar la ruta del TSP

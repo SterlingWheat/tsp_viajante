@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
-// Menú lateral (Drawer) igual al visto en clase 29-04
+// Menú lateral (Drawer)
 // Permite navegar entre pantallas
 class MenuLateral extends StatelessWidget {
   const MenuLateral({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Drawer( //Widget de Flutter para crear un menú lateral deslizable
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [Colors.deepPurple.shade900, Colors.deepPurple.shade300],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topLeft, //El degradado comienza en la esquina superior izquierda
+            end: Alignment.bottomRight, //El degradado termina en la esquina inferior derecha
           ),
         ),
-        child: Column(
+        child: Column( //Organiza los elementos del menú en una columna
           children: [
             // Cabecera con info del usuario
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple.shade900),
+            UserAccountsDrawerHeader( //Widget para mostrar informacion 
+              decoration: BoxDecoration(color: Colors.deepPurple.shade900), //Fondo de la cabecera
               accountName: const Text(
-                'TSP Viajante',
+                'TSP Viajante', //Nombre del titulo del menu
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-              accountEmail: const Text('Algoritmos Genéticos'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.amber,
-                child: Icon(Icons.travel_explore, size: 40, color: Colors.deepPurple.shade900),
+              accountEmail: const Text('Algoritmos Genéticos'), //Subtitulo del menu
+              currentAccountPicture: CircleAvatar( //Avatar circular para el icono del menu
+                backgroundColor: Colors.amber,//Fondo del avatar
+                child: Icon(Icons.travel_explore, size: 40, color: Colors.deepPurple.shade900),//Icono dentro del avatar
               ),
             ),
 
             // Opción: Editor de grafos
             _opcionMenu(
-              context,
-              icono: Icons.account_tree,
-              titulo: 'Editor de Grafos',
-              subtitulo: 'Crear y editar tu grafo',
-              ruta: '/editor',
+              context, 
+              icono: Icons.account_tree, //Icono
+              titulo: 'Editor de Grafos',//Nombre de la opción
+              subtitulo: 'Crear y editar tu grafo',//Subtitulo de la opción
+              ruta: '/editor',//Ruta a la que navega al seleccionar esta opción
             ),
 
             // Opción: Acerca de
@@ -50,16 +50,16 @@ class MenuLateral extends StatelessWidget {
               ruta: '/acerca',
             ),
 
-            const Divider(color: Colors.white30),
+            const Divider(color: Colors.white30),//Linea divisoria
 
             // Volver al inicio
             ListTile(
-              leading: const Icon(Icons.home, color: Colors.white),
+              leading: const Icon(Icons.home, color: Colors.white),//Icono de la opción
               title: const Text('Inicio', style: TextStyle(color: Colors.white)),
-              trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 14),
+              trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 14), //Icono de flecha
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+                Navigator.pop(context);//Cierra el menú lateral
+                Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false); //navega a la ruta de inicio
               },
             ),
           ],
@@ -78,9 +78,9 @@ class MenuLateral extends StatelessWidget {
   }) {
     return ListTile(
       leading: Icon(icono, color: Colors.white),
-      title: Text(titulo, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+      title: Text(titulo, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)), //Grosor 600 para resaltar el título
       subtitle: Text(subtitulo, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 12)),
-      trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 14),
+      trailing: const Icon(Icons.arrow_forward_ios, color: Colors.white54, size: 14),//Icono de flecha
       onTap: () {
         Navigator.pop(context);
         Navigator.pushNamed(context, ruta);

@@ -6,19 +6,19 @@ class Matematicas {
   // Calcula el punto de control para una curva cuadrática de Bézier
   // La curvatura desplaza el punto de control perpendicularmente a la línea
   static Offset calcularPuntoControl(Offset p1, Offset p2, double curvatura) {
-    double dx   = p2.dx - p1.dx;
-    double dy   = p2.dy - p1.dy;
-    double midX = (p1.dx + p2.dx) / 2;
-    double midY = (p1.dy + p2.dy) / 2;
+    double dx   = p2.dx - p1.dx; //Calcula el vector entre p1 y p2 para x
+    double dy   = p2.dy - p1.dy; //Calcula el vector entre p1 y p2 para y
+    double midX = (p1.dx + p2.dx) / 2; //Centro del segmento para x
+    double midY = (p1.dy + p2.dy) / 2; //Centro del segmento para y
 
-    double longitud = sqrt(dx * dx + dy * dy);
-    if (longitud == 0) return Offset(midX, midY);
+    double longitud = sqrt(dx * dx + dy * dy); //Distancia entre p1 y p2
+    if (longitud == 0) return Offset(midX, midY); //Si los puntos son iguales y evita división por cero
 
-    // Vector perpendicular normalizado
+    // Vector perpendicular normalizado, y define hacia donde se curva la linea
     double px = -dy / longitud;
     double py =  dx / longitud;
 
-    return Offset(midX + px * curvatura, midY + py * curvatura);
+    return Offset(midX + px * curvatura, midY + py * curvatura); //Parte del punto del medio, se desplaza perpendicularmente según la curvatura
   }
 
   // Obtiene un punto en la curva cuadrática de Bézier dado t ∈ [0, 1]

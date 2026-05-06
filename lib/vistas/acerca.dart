@@ -9,19 +9,19 @@ class Acerca extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Acerca del Proyecto'),
+        title: const Text('Acerca del Proyecto'), //Título de la barra de navegación
         backgroundColor: Colors.deepPurple.shade700,
         foregroundColor: Colors.white,
       ),
-      drawer: const MenuLateral(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+      drawer: const MenuLateral(), //Menú lateral para navegar entre pantallas
+      body: SingleChildScrollView( //Permite desplazarse si el contenido es muy largo
+        padding: const EdgeInsets.all(20), //Espacio alrededor del contenido de 20px
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,//Alinea el contenido a la izquierda
           children: [
-            _seccion(
+            _seccion( //llama a la funcion _seccion
               context,
-              icono: Icons.route,
+              icono: Icons.route,//Icono de ruta 
               titulo: 'Problema del Viajante (TSP)',
               texto:
                   'El TSP busca el camino más corto que recorre todos los nodos '
@@ -29,7 +29,7 @@ class Acerca extends StatelessWidget {
                   'Es un problema NP-Difícil, es decir, no existe un algoritmo exacto eficiente '
                   'para instancias grandes. Los algoritmos genéticos ofrecen soluciones aproximadas de calidad.',
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 20), //Espacio entre secciones de 20px
             _seccion(
               context,
               icono: Icons.science,
@@ -60,15 +60,15 @@ class Acerca extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             Center(
-              child: ElevatedButton.icon(
-                onPressed: () => Navigator.pushNamed(context, '/editor'),
-                icon: const Icon(Icons.account_tree),
-                label: const Text('Ir al Editor'),
-                style: ElevatedButton.styleFrom(
+              child: ElevatedButton.icon( //Botón con icono
+                onPressed: () => Navigator.pushNamed(context, '/editor'), //Navega a la pantalla del editor al presionar el boton
+                icon: const Icon(Icons.account_tree), //Icono del boton
+                label: const Text('Ir al Editor'),//Texto
+                style: ElevatedButton.styleFrom(//Estilo del boton 
                   backgroundColor: Colors.deepPurple.shade700,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14), //Espacio interno del boton
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),//Bordes redondeados
                 ),
               ),
             ),
@@ -78,21 +78,21 @@ class Acerca extends StatelessWidget {
     );
   }
 
-  Widget _seccion(BuildContext context, {required IconData icono, required String titulo, required String texto}) {
+  Widget _seccion(BuildContext context, {required IconData icono, required String titulo, required String texto}) { //Recibe el contexto, el icono, el título y el texto de la sección
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16), //Espacio interno de 16px para que el contenido no quede pegado a los bordes
       decoration: BoxDecoration(
-        color: Colors.deepPurple.shade50,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.deepPurple.shade200),
+        color: Colors.deepPurple.shade50,//Fondo lila claro para diferenciar las secciones
+        borderRadius: BorderRadius.circular(16), //Bordes redondeados del recuadro contenedor
+        border: Border.all(color: Colors.deepPurple.shade200), //Borde lila suave y delgado
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,//Alinea el contenido a la izquierda dentro de cada sección
         children: [
           Row(children: [
-            Icon(icono, color: Colors.deepPurple.shade700, size: 22),
-            const SizedBox(width: 8),
-            Expanded(
+            Icon(icono, color: Colors.deepPurple.shade700, size: 22), //Icono color lila y tamaño de 22px
+            const SizedBox(width: 8), //Espacio entre el icono y el título de 8px
+            Expanded( //El título ocupa el espacio restante para evitar desbordamientos
               child: Text(titulo,
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.deepPurple.shade700)),
             ),
