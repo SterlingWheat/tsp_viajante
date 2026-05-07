@@ -515,6 +515,22 @@ class _EditorState extends State<Editor> with TickerProviderStateMixin {
       return;
     }
 
+    //--------------------------------------------
+    if (!grafo.esGrafoCompleto()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            '❌ No existe una ruta válida que conecte todos los nodos.\n'
+            'Revisa que haya aristas suficientes para cerrar el ciclo.',
+          ),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 4),
+        ),
+      );
+      return; // Detiene la ejecución aquí mismo
+    }
+    //-----------------------------------------
+
     _detenerAnimacion(); //Detiene cualquier animación en curso antes de ejecutar el algoritmo
 
     ScaffoldMessenger.of(context).showSnackBar(

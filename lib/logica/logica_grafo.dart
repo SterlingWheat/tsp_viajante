@@ -110,4 +110,17 @@ class LogicaGrafo {
       }
     }
   }
+
+  // --- Validación de Grafo Completo ---
+  // Verifica si TODOS los nodos están conectados directamente con TODOS los demás
+  bool esGrafoCompleto() {
+    int n = vNodo.length;
+    if (n < 2) return true; // Con 0 o 1 nodo no hay conexiones que hacer
+
+    // Fórmula matemática para saber cuántas aristas requiere un grafo completo: n * (n - 1) / 2
+    int aristasNecesarias = (n * (n - 1)) ~/ 2;
+
+    // Si la cantidad de aristas dibujadas es igual a las necesarias, es válido
+    return vArista.length == aristasNecesarias;
+  }
 }
